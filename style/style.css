@@ -5,6 +5,7 @@ main {
 .mb-4 {
     width: 200px;
     height: 140px;
+    margin-top: 80px;
 }
 
 /*radio*/
@@ -72,7 +73,6 @@ main {
     width: 60px;
 }
 
-
 #orders tr {
     cursor: pointer;
 }
@@ -96,6 +96,10 @@ main {
 
 .modal-content {
     border-radius: .5rem;
+    -webkit-border-radius: .5rem;
+    -moz-border-radius: .5rem;
+    -ms-border-radius: .5rem;
+    -o-border-radius: .5rem;
 }
 
 .modal-currency span {
