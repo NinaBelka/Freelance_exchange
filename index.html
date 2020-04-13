@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 
 <head>
@@ -43,26 +43,25 @@
         <form id="form-customer">
 
           <div class="mb-3">
-            <label for="title">Заголовок (краткое описание задачи)</label>
+            <label for="title">Заголовок</label>
             <input type="text" class="form-control" id="title" name="title"
-              required placeholder="Заголовок">
+              required placeholder="Краткое описание задачи">
           </div>
           <div class="row">
             <div class="col-md-4 mb-3">
-              <label for="firstName">Ваше имя</label>
+              <label for="firstName">Имя</label>
               <input type="text" class="form-control" id="firstName"
                 name="firstName" required placeholder="Ваше имя">
             </div>
             <div class="col-md-4 mb-3">
-              <label for="email">Email</label>
+              <label for="email">E-mail</label>
               <input type="email" class="form-control" id="email" name="email"
                 placeholder="you@mail.com" required>
             </div>
             <div class="col-md-4 mb-3">
-              <label for="phone">Номер телефона <span
-                  class="text-muted">(optional)</span></label>
+              <label for="phone">Номер телефона </label>
               <input type="text" class="form-control" id="phone" name="phone"
-                placeholder="+375291234567">
+                placeholder="+375291234567" required>
             </div>
           </div>
 
@@ -104,7 +103,8 @@
                 <label for="deadline">Срок выполнения до:</label>
 
                 <input type="date" id="deadline" class="form-control"
-                  name="deadline" max="2020-12-31" required placeholder="__.__.____">
+                  name="deadline" max="2020-12-31" required
+                  placeholder="__.__.____">
               </div>
               <button class="btn btn-primary btn-lg btn-block"
                 type="submit">Отправить заявку</button>
@@ -147,7 +147,7 @@
 
       <div class="modal-content">
         <div class="modal-header bg-dark text-white">
-          <h4 class="modal-title ">Заголовок</h4>
+          <h4 class="modal-title">Заголовок</h4>
           <button type="button" class="close text-white" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -177,7 +177,7 @@
           <div class="modal-currency">
             <span class="text">Оплата:</span>
             <span class="currency"><span class="currency_img"></span></span>
-            <span class="count">5</span>
+            <span class="count"></span>
           </div>
           <div>
             <button type="button" class="btn btn-info"><a
@@ -218,7 +218,7 @@
             <div class="col-4 text-center modal-currency">
               <span class="text">Оплата:</span>
               <span class="currency"><span class="currency_img"></span></span>
-              <span class="count">5</span>
+              <span class="count"></span>
             </div>
             <div class="col-12 bg-info text-white my-4 py-2">
               <h5>Подробное описание задачи</h5>
