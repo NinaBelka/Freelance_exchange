@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 main {
     position: relative;
 }
@@ -54,7 +58,6 @@ main {
 
 /*table*/
 
-
 .euro {
     background: url("../img/euro.png") center/contain no-repeat;
     height: 40px;
@@ -93,13 +96,17 @@ main {
     font-weight: 500;
     line-height: 1.2;
 }
-
+.modal-dialog {
+    
+}
 .modal-content {
+    display: block;
     border-radius: .5rem;
     -webkit-border-radius: .5rem;
     -moz-border-radius: .5rem;
     -ms-border-radius: .5rem;
     -o-border-radius: .5rem;
+    overflow-y: auto;
 }
 
 .modal-currency span {
@@ -133,5 +140,5 @@ main {
 }
 
 .thead-sort:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.6);
 }
