@@ -140,3 +140,19 @@ main {
 .thead-sort:hover {
     background-color: rgba(0, 0, 0, 0.6);
 }
+
+@media (max-width: 576px) {
+    .modal-title {
+        font-size: 20px;
+    }
+    h5 {
+        font-size: 16px;
+    }
+    .description {
+        font-size: 10px;
+    }
+    span.text {
+        font-size: 20px;
+    }
+
+}
