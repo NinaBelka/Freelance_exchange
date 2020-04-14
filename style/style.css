@@ -96,9 +96,7 @@ main {
     font-weight: 500;
     line-height: 1.2;
 }
-.modal-dialog {
-    
-}
+
 .modal-content {
     display: block;
     border-radius: .5rem;
