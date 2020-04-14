@@ -10,7 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
     formCustomer = document.getElementById('form-customer'),
     ordersTable = document.getElementById('orders'),
     modalOrder = document.getElementById('order_read'),
-    modalOrderActive = document.getElementById('order_active');
+    modalOrderActive = document.getElementById('order_active'),
+    theadTable = document.getElementById('theadTable');
+
+  // Сохранение данных в localStorage:
 
   const orders = JSON.parse(localStorage.getItem('freeOrders')) || [];
 
@@ -18,9 +21,21 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('freeOrders', JSON.stringify(orders));
   };
 
-  const calcDeadline = (deadline) => {
-    const day = '10 дней';
-    return day;
+  // Остаток дней до дедлайна (в падеже):
+
+  const declOfNum = (number, titles) => number + ' ' + titles[(number % 100 > 4 && number % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(number % 10 < 5) ? number % 10 : 5]];
+
+  const calcDeadline = (date) => {
+    const deadline = new Date(date);
+    const toDay = Date.now();
+
+    const remaining = (deadline - toDay) / 1000 / 60 / 60;
+
+    if (remaining / 24 > 1) {
+      return declOfNum(Math.floor(remaining / 24), ['день', 'дня', 'дней']);
+    }
+
+    return declOfNum(Math.floor(remaining), ['час', 'часа', 'часов']);
   };
 
   const renderOrders = () => {
@@ -28,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ordersTable.textContent = '';
 
     orders.forEach((order, i) => {
-
       ordersTable.innerHTML += `
         <tr class="order ${order.active ? 'taken' : ''}" data-number-order="${i}">
           <td>${i + 1}</td>
@@ -44,6 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const target = event.target;
     const modal = target.closest('.order-modal');
     const order = orders[modal.id];
+
+    // Делегирование:
 
     const baseAction = () => {
       modal.style.display = 'none';
@@ -71,13 +87,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  // Вывод данных в модальное окно:
+
   const openModal = (numberOrder) => {
     const order = orders[numberOrder];
 
     const { title, firstName, email, phone, description, amount, currency, deadline, active = false } = order;
 
     const modal = active ? modalOrderActive : modalOrder;
-
 
     const titleBlock = modal.querySelector('.modal-title'),
       firstNameBlock = modal.querySelector('.firstName'),
@@ -105,13 +122,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     modal.addEventListener('click', handlerModal);
 
-
   };
+
+  // Сортировка объектов в массиве:
+
+  const sortOrder = (arr, property) => {
+    arr.sort((a, b) => a[property] > b[property] ? 1 : -1);
+  };
+
+  // Сортировка таблицы фрилансера по столбцам:
+
+  theadTable.addEventListener('click', (event) => {
+    const target = event.target;
+
+    if (target.classList.contains('thead-sort')) {
+      if (target.id === 'task-sort') {
+        sortOrder(orders, 'title');
+      }
+
+      if (target.id === 'currencySort') {
+        sortOrder(orders, 'currency');
+      }
+
+      if (target.id === 'deadlineSort') {
+        sortOrder(orders, 'deadline');
+      }
+
+      toStorage();
+      renderOrders();
+    }
+  });
+
+  // Переход между окнами заказчика, фрилансера, модальными:
 
   ordersTable.addEventListener('click', event => {
     const target = event.target;
 
     const targetOrder = target.closest('.order');
+    
     if (targetOrder) {
       openModal(targetOrder.dataset.numberOrder);
     }
@@ -120,6 +168,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   customer.addEventListener('click', () => {
     blockChoice.style.display = 'none';
+    const toDay = new Date().toISOString().substring(0, 10);
+
+    // Запрет выбора даты дедлайна меньше текущей даты:
+    document.getElementById('deadline').min = toDay;
+
     blockCustomer.style.display = 'block';
     btnExit.style.display = 'block';
   });
@@ -157,6 +210,5 @@ document.addEventListener('DOMContentLoaded', () => {
     orders.push(obj);
     toStorage();
   });
-
 
 });

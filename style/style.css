@@ -127,3 +127,11 @@ main {
     right: 1rem;
     padding: 0.5rem 3rem;
 }
+
+.thead-sort {
+    cursor: pointer;
+}
+
+.thead-sort:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
